@@ -1,6 +1,6 @@
 import React from "react";
-import { useJobApiRequest } from "../../requests/useJobApiReq";
-import { JobList } from "../../components/Joblist";
+import useJobApiRequest from '../../requests/useJobApiReq';
+import JobList from '../../components/Joblist';
 
 const RightBar = () => {
   const { data, loading, error } = useJobApiRequest();

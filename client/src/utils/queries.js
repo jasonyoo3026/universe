@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const FETCH_POST_QUERY = gql`
+export const FETCH_POST_QUERY = gql`
   query($postId: ID!) {
     getPost(postId: $postId) {
       id
@@ -22,3 +22,5 @@ const FETCH_POST_QUERY = gql`
     }
   }
 `;
+
+export default queries;

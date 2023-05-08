@@ -5,10 +5,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
-import { SinglePost } from "./components";
-import { NavBar, Footer, LeftBar, RightBar } from "./Layout";
+import { SinglePost, ProtectedRoutes } from "./components";
+import { Navbar, Footer, LeftBar, RightBar } from "./Layout";
 import { Homepage, SearchPage, SavedPostList } from "./Views";
-import ProtectedRoutes from "./Auth/protectedRoutes";
+// import { ProtectedRoutes } from "./components"
 
 const App = () => {
   function ScrollToTop() {
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
+      <Navbar />
       <main className="main-layout">
         <LeftBar />
         <ScrollToTop />

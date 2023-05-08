@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery, gql, useMutation } from '@apollo/client';
 
-import { DeleteBtn, LikeBtn } from '../../components'
-import { ADD_COMMENT_MUTATION } from '../../utils/mutations';
-import { FETCH_POST_QUERY } from '../../utils/queries';
+import { DeleteBtn, LikeBtn } from '../../Btn'
+import { ADD_COMMENT_MUTATION } from '../../../utils/mutations';
+import { FETCH_POST_QUERY } from '../../../utils/queries';
 
 const SinglePost = (props) => {
     const { user } = useAuth0();

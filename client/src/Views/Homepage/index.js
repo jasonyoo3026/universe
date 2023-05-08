@@ -4,11 +4,12 @@ import { Grid, Transition } from 'semantic-ui-react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { NewPost } from "../../components";
-import { FETCH_POSTS_QUERY } from '../../utils/queries';
+import PostCard from "../../components/Post/PostCard";
+import FETCH_POST_QUERY from '../../utils/queries';
 
 const PostFeed = () => {
     const { user } = useAuth0();
-    const { loading, error, data } = useQuery(FETCH_POSTS_QUERY);
+    const { loading, error, data } = useQuery(FETCH_POST_QUERY);
 
     const renderFeed = () => {
         if (loading) {

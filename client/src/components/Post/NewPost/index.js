@@ -3,8 +3,8 @@ import { Form, Button } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { FETCH_POSTS_QUERY } from '../../utils/queries';
-import { CREATE_POST_MUTATION } from '../../utils/mutations';
+import { FETCH_POST_QUERY } from '../../../utils/queries';
+import { CREATE_POST_MUTATION } from '../../../utils/mutations';
 
 const NewPost = () => {
     const { user } = useAuth0();
@@ -27,12 +27,12 @@ const NewPost = () => {
         variables: values,
         update(proxy, result) {
             const data = proxy.readQuery({
-                query: FETCH_POSTS_QUERY
+                query: FETCH_POST_QUERY
             });
             let newData = [...data.getPosts];
             newData = [result.data.createPost, ...newData];
             proxy.writeQuery({
-                query: FETCH_POSTS_QUERY,
+                query: FETCH_POST_QUERY,
                 data: {
                     ...data,
                     getPosts: {

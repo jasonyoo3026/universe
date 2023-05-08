@@ -1,9 +1,9 @@
 import React from "react";
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { Button } from 'semantic-ui-react';
 
-import { FETCH_POSTS_QUERY } from '../../graphql';
-import { DELETE_POST_MUTATION, DELETE_COMMENT_MUTATION } from '../../utils/mutations';
+import { FETCH_POST_QUERY } from '../../../utils/queries';
+import { DELETE_POST_MUTATION, DELETE_COMMENT_MUTATION } from '../../../utils/mutations';
 
 const DeleteBtn = ({ postId, mongoId, commentId }) => {
     const userId = mongoId;
@@ -19,12 +19,12 @@ const DeleteBtn = ({ postId, mongoId, commentId }) => {
         update(proxy) {
             if (!commentId) {
                 const data = proxy.readQuery({
-                    query: FETCH_POSTS_QUERY
+                    query: FETCH_POST_QUERY
                 });
                 let newData = [...data.getPosts];
                 newData = [data.getPosts.filter((p) => p.id !== postId)];
                 proxy.writeQuery({
-                    query: FETCH_POSTS_QUERY,
+                    query: FETCH_POST_QUERY,
                     data: {
                         ...data,
                         getPosts: {

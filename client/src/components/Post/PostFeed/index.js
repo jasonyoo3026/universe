@@ -2,12 +2,12 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { Grid, Transition } from 'semantic-ui-react';
 import { useAuth0 } from "@auth0/auth0-react";
-import { CreatePost, Loading, Posts } from "../../components";
-import { FETCH_POSTS_QUERY } from '../../graphql';
+import { NewPost, PostCard } from "../";
+import { FETCH_POST_QUERY } from '../../../utils/queries';
 
 const PostFeed = () => {
     const { user } = useAuth0();
-    const { loading, error, data } = useQuery(FETCH_POSTS_QUERY);
+    const { loading, error, data } = useQuery(FETCH_POST_QUERY);
 
     return (
         <>
@@ -16,10 +16,10 @@ const PostFeed = () => {
             ) : (
                 <main className="post-feed-container">
                     <Transition.Group>
-                        {user && <CreatePost />}
-                        {data && data.getPosts.map((post) => (
+                        {user && <NewPost />}
+                        {data && data.getPostCard.map((post) => (
                             <Grid.Column key={post.id} style={{ marginBottom: 25 }}>
-                                <Posts post={post} />
+                                <PostCard post={post} />
                             </Grid.Column>
                         ))}
                     </Transition.Group>

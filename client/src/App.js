@@ -1,16 +1,23 @@
 import React, { useEffect } from "react";
 import { Routes, useLocation, Route } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
-import { SinglePost, ProtectedRoutes } from "./components";
+import { SinglePost, Loading } from "./components";
 import { Navbar, Footer, LeftBar, RightBar } from "./Layout";
 import { Homepage, SearchPage, SavedPostList } from "./Views";
-// import { ProtectedRoutes } from "./components"
+import ProtectedRoutes from "./Auth/protectedRoutes"
+import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
+  const { isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <Loading />
+  }
+
   function ScrollToTop() {
     const { pathname } = useLocation();
 

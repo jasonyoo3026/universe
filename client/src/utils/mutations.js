@@ -71,5 +71,3 @@ export const LIKE_POST_MUTATION = gql`
     }
   }
 `;
-
-export default mutations;

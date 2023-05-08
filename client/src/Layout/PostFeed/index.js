@@ -2,8 +2,10 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { Grid, Transition } from 'semantic-ui-react';
 import { useAuth0 } from "@auth0/auth0-react";
-import { NewPost, PostCard } from "../";
-import { FETCH_POST_QUERY } from '../../../utils/queries';
+import { NewPost, PostCard } from "../../components/Post";
+import Loading from "../../components/Loading"
+// import { PostCard } from "../../components/Post/PostCard";
+import { FETCH_POST_QUERY } from '../../utils/queries';
 
 const PostFeed = () => {
     const { user } = useAuth0();
@@ -31,3 +33,11 @@ const PostFeed = () => {
 };
 
 export default PostFeed;
+
+// import React from 'react';
+
+// const PostFeed = () => {
+//   return <div>PostFeed</div>;
+// };
+
+// export default PostFeed;

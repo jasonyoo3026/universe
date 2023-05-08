@@ -7,10 +7,9 @@ import { DELETE_POST_MUTATION, DELETE_COMMENT_MUTATION } from '../../../utils/mu
 
 const DeleteBtn = ({ postId, mongoId, commentId }) => {
     const userId = mongoId;
+    const selectedMutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
 
-    const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
-
-    const [deleteOnClick] = useMutation(mutation, {
+    const [handleDelete] = useMutation(selectedMutation, {
         variables: {
             postId,
             userId,
@@ -18,17 +17,17 @@ const DeleteBtn = ({ postId, mongoId, commentId }) => {
         },
         update(proxy) {
             if (!commentId) {
-                const data = proxy.readQuery({
+                const postData = proxy.readQuery({
                     query: FETCH_POST_QUERY
                 });
-                let newData = [...data.getPosts];
-                newData = [data.getPosts.filter((p) => p.id !== postId)];
+                let updatedData = [...postData.getPosts];
+                updatedData = [postData.getPosts.filter((p) => p.id !== postId)];
                 proxy.writeQuery({
                     query: FETCH_POST_QUERY,
                     data: {
-                        ...data,
+                        ...postData,
                         getPosts: {
-                            newData,
+                            updatedData,
                         },
                     },
                 })
@@ -39,8 +38,9 @@ const DeleteBtn = ({ postId, mongoId, commentId }) => {
     return (
         <Button
             floated="right"
-            onClick={deleteOnClick}>
-            Delete
+            color="red"
+            onClick={handleDelete}>
+            Remove
         </Button>
     );
 };

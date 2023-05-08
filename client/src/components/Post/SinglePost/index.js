@@ -4,7 +4,7 @@ import { Card, Image, Button, Label, Icon, Form } from 'semantic-ui-react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
-import { useQuery, gql, useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { DeleteBtn, LikeBtn } from '../../Btn'
 import { ADD_COMMENT_MUTATION } from '../../../utils/mutations';

@@ -1,4 +1,6 @@
-export { default as NewPost } from './NewPost';
-export { default as PostFeed } from './PostFeed';
-export { default as SinglePost } from './SinglePost';
-export { default as PostCard } from './PostCard';
+import NewPost from './NewPost';
+// import PostFeed from '../../Layout/PostFeed';
+import SinglePost from './SinglePost';
+import PostCard from './PostCard';
+
+export { NewPost, SinglePost, PostCard };

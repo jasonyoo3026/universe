@@ -12,60 +12,60 @@ const NewPost = () => {
     const mongoId = sub.substring(6);
     const userAvatar = user.picture;
 
-    const [values, setValues] = useState({ body: "", userId: mongoId, userAvatar: userAvatar });
+    const [postContent, setPostContent] = useState({ body: "", userId: mongoId, userAvatar: userAvatar });
 
-    const onChange = (e) => {
-        setValues(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const handleInputChange = (e) => {
+        setPostContent(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        submitPostData();
+        submitNewPost();
     };
 
-    const [submitPostData, { error }] = useMutation(CREATE_POST_MUTATION, {
-        variables: values,
+    const [submitNewPost, { errorMsg }] = useMutation(CREATE_POST_MUTATION, {
+        variables: postContent,
         update(proxy, result) {
-            const data = proxy.readQuery({
+            const postData = proxy.readQuery({
                 query: FETCH_POST_QUERY
             });
-            let newData = [...data.getPosts];
-            newData = [result.data.createPost, ...newData];
+            let updatedData = [...postData.getPosts];
+            updatedData = [result.data.createPost, ...updatedData];
             proxy.writeQuery({
                 query: FETCH_POST_QUERY,
                 data: {
-                    ...data,
+                    ...postData,
                     getPosts: {
-                        newData,
+                        updatedData,
                     },
                 },
             });
-            values.body = '';
+            postContent.body = '';
         }
     })
 
     return (
         <>
-            <Form onSubmit={onSubmit}>
-                <h4>Share your thoughts!</h4>
+            <Form onSubmit={handleSubmit}>
+                <h4>What's on your mind?</h4>
                 <Form.Field>
                     <Form.Input
-                        placeholder="What have you been watching? 🎬"
+                        placeholder="Share your experience"
                         name="body"
                         autoComplete="off"
-                        value={values.body}
-                        onChange={onChange}
-                        error={error ? true : false}
+                        value={postContent.body}
+                        onChange={handleInputChange}
+                        error={errorMsg ? true : false}
                     />
-                    <Button type="submit" inverted color="orange">
-                        Post!
+                    <Button type="submit" inverted color="purple">
+                        Publish
                     </Button>
                 </Form.Field>
             </Form>
 
-            {error && (
+            {errorMsg && (
                 <div className="ui error message" style={{ marginBottom: "1rem", marginTop: "0" }}>
-                    {error.graphQLErrors[0].message}
+                    {errorMsg.graphQLErrors[0].message}
                 </div>
             )}
         </>

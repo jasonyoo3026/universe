@@ -22,5 +22,3 @@ export const FETCH_POST_QUERY = gql`
     }
   }
 `;
-
-export default queries;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Card, Image, Button, Label, Icon, Form } from 'semantic-ui-react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ const SinglePost = (props) => {
 
     const postId = props.match.params.postId;
 
-    const history = useHistory();
+    const history = useNavigate();
 
     const [comment, setComment] = useState("");
 

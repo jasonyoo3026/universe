@@ -1,11 +1,14 @@
 export { default as AuthBtn } from './Auth/AuthBtn';
 export { default as NewPost } from './Post/NewPost';
-export { default as RemoveBtn } from './Btn/RemoveBtn';
+export { default as DeleteBtn } from './Btn/DeleteBtn';
 export { default as SearchResults } from './SearchResults';
 export { default as PostLikes } from './Post/PostLikes';
-export { default as SignInBtn } from './Btn/SignInBtn';
-export { default as SignOutBtn } from './Btn/SignOutBtn';
+export { default as LogInBtn } from './Btn/LogInBtn';
+export { default as LogOutBtn } from './Btn/LogOutBtn';
 export { default as PostFeed } from './Post/PostFeed';
-export { default as RegisterBtn } from './Btn/RegisterBtn';
+export { default as SignupBtn } from './Btn/SignupBtn';
 export { default as SinglePost } from './Post/SinglePost';
+
+
+
 

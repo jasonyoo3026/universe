@@ -8,7 +8,7 @@ This project was to build a social media app where students can post their opini
 ## Brief Demo
 Here, there will be a screenshot of my website.
 
-![The view of website log](./react-app/src/Assets/Universe_logo.png)
+![The view of website log](./client/src/Assets/Universe_logo.png)
 
 
 

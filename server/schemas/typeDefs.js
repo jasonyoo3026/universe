@@ -30,6 +30,15 @@ module.exports = gql`
         university: String!
         createdAt: String!
     }
+    type SearchHistory {
+        id: ID!
+        keyword: String!
+        createdAt: String!
+    }
+    type TopKeyword {
+        keyword: String!
+        count: Int!
+    }
 
     input RegisterInput {
         username: String!
@@ -45,6 +54,7 @@ module.exports = gql`
     type Query {
         getPosts: [Post]
         getPost(postId: ID!): Post
+        getTopKeywords: [TopKeyword!]!
     }
     type Mutation {
         register(registerInput: RegisterInput): User!
@@ -54,5 +64,6 @@ module.exports = gql`
         createComment(postId: ID!, body: String!): Post!
         deleteComment(postId: ID!, commentId: ID!): Post!
         likePost(postId: ID!): Post!
+        saveSearch(keyword: String!): SearchHistory!
     }
 `;

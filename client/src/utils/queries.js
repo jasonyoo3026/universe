@@ -22,3 +22,12 @@ export const FETCH_POST_QUERY = gql`
     }
   }
 `;
+
+export const GET_TOP_KEYWORDS = gql`
+  query GetTopKeywords {
+    getTopKeywords {
+      keyword
+      count
+    }
+  }
+`;

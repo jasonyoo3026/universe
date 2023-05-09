@@ -1,22 +1,38 @@
-const postsResolvers = require("./posts");
-const usersResolvers = require("./users");
-const commentsResolvers = require("./comments");
+const postResolvers = require('./posts');
+const userResolvers = require('./users');
+const commentResolvers = require('./comments');
+const SearchHistory = require('../../models/SearchHistory');
 
 module.exports = {
-  Post: {
-    likeCount(parent) {
-      return parent.likes.length;
-    },
-    commentCount(parent) {
-      return parent.comments.length;
-    }
-  },
   Query: {
-    ...postsResolvers.Query
+    ...postResolvers.Query,
+    ...userResolvers.Query,
+    getTopKeywords: async () => {
+      try {
+        const topKeywords = await SearchHistory.aggregate([
+          { $group: { _id: "$keyword", count: { $sum: 1 } } },
+          { $sort: { count: -1 } },
+          { $limit: 10 },
+          { $project: { _id: 0, keyword: "$_id", count: 1 } },
+        ]);
+        return topKeywords;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
   Mutation: {
-    ...usersResolvers.Mutation,
-    ...postsResolvers.Mutation,
-    ...commentsResolvers.Mutation
-  }
+    ...userResolvers.Mutation,
+    ...postResolvers.Mutation,
+    ...commentResolvers.Mutation,
+    saveSearch: async (_, { keyword }, context) => {
+      const newSearch = new SearchHistory({
+        keyword,
+        createdAt: new Date().toISOString(),
+      });
+
+      const search = await newSearch.save();
+      return search;
+    },
+  },
 };

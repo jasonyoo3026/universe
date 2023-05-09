@@ -1,25 +1,20 @@
-import React, { useContext } from "react";
-import SearchHistoryContext from "../../SearchHistory.js";
+import React from "react";
+import { useQuery } from "@apollo/client";
+import { GET_TOP_KEYWORDS } from "../../utils/queries";
 
 const LeftBar = () => {
-  const { searchHistory } = useContext(SearchHistoryContext);
+  const { loading, error, data } = useQuery(GET_TOP_KEYWORDS);
 
-  const keywordCounts = searchHistory.reduce((acc, keyword) => {
-    acc[keyword] = (acc[keyword] || 0) + 1;
-    return acc;
-  }, {});
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
-  const sortedKeywords = Object.entries(keywordCounts).sort(
-    (a, b) => b[1] - a[1]
-  );
-
-  const topKeywords = sortedKeywords.slice(0, 10);
+  const topKeywords = data.getTopKeywords;
 
   return (
     <div className="left-bar">
       <h3>Top 10 Searched Keywords</h3>
       <ul>
-        {topKeywords.map(([keyword, count], index) => (
+        {topKeywords.map(({ keyword, count }, index) => (
           <li key={index}>
             {keyword}: {count} searches
           </li>

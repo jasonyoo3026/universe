@@ -5,6 +5,5 @@ export { default as LikeBtn } from './Btn/LikeBtn';
 export { default as LogoutBtn } from './Btn/LogoutBtn';
 export { default as SignupBtn } from './Btn/SignupBtn';
 export { default as SinglePost } from './Post/SinglePost';
-export { default as ProtectedRoutes} from '../Auth/protectedRoutes';
-export { default as Signup} from '../Auth/SignupForm';
+// export { default as ProtectedRoutes} from '../Auth/protectedRoutes';
 export { default as Loading } from './Loading';

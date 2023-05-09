@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const University = require("../models/University");
+const SeedData= require('./postSeedData');
 
 const db = require("../config/connection");
 
